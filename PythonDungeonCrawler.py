@@ -1,6 +1,7 @@
 import random
 import sys
 import os
+########## Functions for text display ###########
 def cleanup():
     raw_input("**Press any button to continue...")
     os.system("clear")
@@ -14,28 +15,31 @@ def pow(txt):
     print ("^")*(len(txt)+4)
     print ("| " + txt + " |")
     print ("^")*(len(txt)+4)
+##################################################
 
 
-class Item:
+################## Items #########################
+class Item: ### Sets Item super class
     def __init__(self, name, price, count, description):
         self.name = self
         self.price = price
         self.count = count
         self.description = description
-    def __str__(self):
+    def __str__(self): #description
         return (str(self.name) + ": " + str(self.price) + "-Gold, " + str(self.count) + "-left")
     def pack(self, user, backpack):
        backpack.append(self)
 
+ ### each item is a subclass of the superclass item and is formatted similarly to the first ####
 class SuperTonic(Item):
     def __init__(self):
-        self.name = "Super Tonic"
-        self.count = 5
-        self.price = 20*((self.count-6) * (-1))
-        self.description = "Brings your character back to max health.(Usable in battle)"
-    def use(self, user, enemy):
+        self.name = "Super Tonic" #name
+        self.count = 5 #how many are in the store
+        self.price = 20*((self.count-6) * (-1)) #price incrimented by how many are left
+        self.description = "Brings your character back to max health.(Usable in battle)" #description of useage
+    def use(self, user, enemy): #code applying the affefcts of the idtem when used
         user.health = user.max
-    def pic(self):
+    def pic(self): #a picture to catalog the item
         print"______________________________8888888"
         print"_____________________________88"
         print"____________________________88"
@@ -311,11 +315,12 @@ class Hire_DeadPool(Item):
         user.power = user.power + 10
     def pic(self):
         print "You have to buy me to get my picture. I dont put out for just anyone. ;)"
-  
-#####################
+#################################################
 
+
+################# charachters ###################
 class Charachter:
-    def __init__(self, name, health, power, level):
+    def __init__(self, name, health, power, level): # charachter stats
         self.name = name
         self.health = health
         self.max = health
@@ -325,18 +330,18 @@ class Charachter:
         self.level = 1
 
     def __str__(self):
-        print self.name + ": " + self.health + "hp, " + self.power + "pw, " + self.evade + "ev, " + self.armor + "ar"
+        print self.name + ": " + self.health + "hp, " + self.power + "pw, " + self.evade + "ev, " + self.armor + "ar" # shows char stats
 
     def print_status(self):
-        print ("The {} has {} health and {} power.".format(self.name, self.health, self.power))
+        print ("The {} has {} health and {} power.".format(self.name, self.health, self.power)) # shows char stats
  
-    def alive(self):
+    def alive(self): # determines if char is alive after an attack
         if self.health > 0:
             return True
         else:
             return False
     
-    def attack(self, enemy):
+    def attack(self, enemy):    # determines damage a char does on any given attack
         miss = random.randint(1, 100)
         if 1 < miss < (enemy.evade * 5):
             pow("The enemy missed!")
@@ -348,6 +353,7 @@ class Charachter:
                 enemy.health = enemy.health - damage
                 print ("The {} does {} dammage to the {}. The {} has {} health left.").format(self.name, damage, enemy.name, enemy.name, enemy.health)
 
+ ### each item is a subclass of the superclass item and is formatted similarly to the first ####
 class Hero(Charachter):
     def __init__(self):
         self.name = "hero"
@@ -846,7 +852,7 @@ def fight_sequence(flenemy, hero, backpack):
     flenemy.descripty()
     cleanup()
 
-    while flenemy.alive() and hero.alive():
+    while flenemy.alive() and hero.alive():# fight sequence options
         print"___________________________________________________________________________________"
         hero.print_status()
         flenemy.print_status()
@@ -890,7 +896,7 @@ def fight_sequence(flenemy, hero, backpack):
                 hero.gold += flenemy.gold
                 print"                  \' You found {} gold!   ".format(flenemy.gold)
                 print"                  ............................"
-        elif raw_input == 2:
+        elif raw_input == 2: 
             os.system("clear")
             print" ______________________________"
             print"| Choose an item number to use |"
@@ -940,9 +946,9 @@ def fight_sequence(flenemy, hero, backpack):
                 sys.exit()
 
 
-def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
+def store(a, b, c, d, e, f, g, h, i, j, hero, backpack): # open tbhe store
 
-    def sure():
+    def sure(): # function for asking if you want to leave a menu or go back to the store
         os.system("clear")
         print " __________________________________________"
         print "| Are you sure you want to leave? (Y or N) |"
@@ -958,7 +964,7 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
             banner("Please enter yes or no. ")
             sure()
         
-    def want_to_buy(item, backpack):
+    def want_to_buy(item, backpack): # function for determining if you want to buy an item you have chosen or not 
         os.system("clear")
         item.pic()
         print item.description
@@ -968,7 +974,7 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
         print "| Type \'2\' To go back to the store. |"
         print "| Type \'3\' To exit the store.       |"
         print " _____________________________________ "
-        try:
+        try:    # options to determine the results fomr what youy pick
             choice = int(input(">>"))
         except ValueError:
             banner("\nPlease only use integers")
@@ -1022,7 +1028,8 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
             banner("Invalid input, please try again: ")
             store(a, b, c, d, e, f, g, h, i, j, hero, backpack)
     
-    cleanup()
+    cleanup() 
+    # shop intro
     print"___       __    ______                                 _____            ___________            _____________               ______"
     print"__ |     / /_______  /__________________ ________      __  /______      __  /___  /______      __  ___/__  /__________________  /"
     print"__ | /| / /_  _ \_  /_  ___/  __ \_  __ `__ \  _ \     _  __/  __ \     _  __/_  __ \  _ \     _____ \__  __ \  __ \__  __ \_  / "
@@ -1035,9 +1042,9 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
     print"                ________________________________________________________________________________________"
     print" "
     print"      $$$$$$$$$$$$$$$"
-    print"      $  Gold: {}  $".format(hero.gold)
+    print"      $  Gold: {}  $".format(hero.gold) #current hero gold
     print"      $$$$$$$$$$$$$$$"
-    print ""
+    print ""# list of items and how many are left
     print ("1. " + str(a) + "\n2. " + str(b) + "\n3. " + str(c) + "\n4. " + str(d) + "\n5. " + str(e) + "\n6. " + str(f) + "\n7. " + str(g) + "\n8. " + str(h) + "\n9. " + str(i) + "\n10. " + str(j) + "\n11. Get Hero Status\n12.  Exit")
     print" ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     print " "
@@ -1045,7 +1052,7 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
         choice = int(input(">>"))
     except ValueError:
         banner("Please only use integers")
-        store(a, b, c, d, e, f, g, h, i, j, hero, backpack)
+        store(a, b, c, d, e, f, g, h, i, j, hero, backpack) #determines what item the usser wants to look at
     if choice == 1:
         want_to_buy(a, backpack)
     elif choice == 2:
@@ -1084,7 +1091,7 @@ def store(a, b, c, d, e, f, g, h, i, j, hero, backpack):
         store(a, b, c, d, e, f, g, h, i, j, hero, backpack)
 
 
-def main():
+def main(): # game intro (Game starts here)
     print"_        ____  _     __    ___   _   _  ____     _____  ___  "
     print"\ \    /| |_  | |   / /`  / / \ | |\/| | |_       | |  / / \ "
     print" \_\/\/ |_|__ |_|__ \_\_, \_\_/ |_|  | |_|__      |_|  \_\_/  o o o"
@@ -1127,7 +1134,7 @@ def main():
     backpack = []
     floor_count = 1
     thishero = Hero()
-    #items
+    #items set
     super_tonic = SuperTonic()
     armor_plate = ArmorPlate()
     holy_hand_grande = HolyHandGrenade()
@@ -1138,7 +1145,7 @@ def main():
     magic_missile_launcher = MagicMissilelauncher()
     lightsaber = LightSaber()
     hire_deadpool = Hire_DeadPool()
-    #enemies
+    #enemies set
     medic = Medic(floor_count)
     shadow = Shadow(floor_count)
     goblin = Goblin(floor_count)
@@ -1150,7 +1157,7 @@ def main():
 
 
     while floor_count < 25:
-        #enemies1   
+        #enemies1   set by level increase
         medic = Medic(floor_count)
         shadow = Shadow(floor_count)
         goblin = Goblin(floor_count)
@@ -1159,7 +1166,7 @@ def main():
         rock_golem = RockGolem(floor_count)
         dark_wizard = DarkWizard()
         #
-        enemy_rotation = [medic, shadow, goblin, slime, fire_emp, rock_golem]
+        enemy_rotation = [medic, shadow, goblin, slime, fire_emp, rock_golem]   #array to pick random enemy from
         next_enemy = random.randint(0, 5)
         flenemy = enemy_rotation[next_enemy]
         cleanup()
@@ -1167,8 +1174,8 @@ def main():
         print"                          + Floor #{} +".format(floor_count)
         print"                          +++++++++++++"
         print" "
-        fight_sequence(flenemy, thishero, backpack)
-        store(super_tonic, holy_hand_grande, armor_plate, nurse, protien_shake, axe, winchester, magic_missile_launcher, lightsaber, hire_deadpool, thishero, backpack)
+        fight_sequence(flenemy, thishero, backpack) #calls fight
+        store(super_tonic, holy_hand_grande, armor_plate, nurse, protien_shake, axe, winchester, magic_missile_launcher, lightsaber, hire_deadpool, thishero, backpack) #calls store
         floor_count += 1
 
     cleanup()
