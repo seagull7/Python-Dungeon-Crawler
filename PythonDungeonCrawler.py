@@ -3,7 +3,7 @@ import sys
 import os
 ########## Functions for text display ###########
 def cleanup():
-    raw_input("**Press any button to continue...")
+    raw_input("**Press enter to continue...")
     os.system("clear")
 
 def banner(txt):
@@ -354,7 +354,7 @@ class Charachter:
                 print ("The {} does {} dammage to the {}. The {} has {} health left.").format(self.name, damage, enemy.name, enemy.name, enemy.health)
 
  ### each item is a subclass of the superclass item and is formatted similarly to the first ####
-class Hero(Charachter):
+class Hero(Character):
     def __init__(self):
         self.name = "hero"
         self.max = 20
@@ -416,7 +416,7 @@ class Hero(Charachter):
         print'       |       _\.:||:./_ '
         print'       |      /____/\____\ '
 
-class Medic(Charachter):
+class Medic(Character):
     def __init__(self, level):
         self.name = "Witch Doctor"
         self.health = 10 + (10*.1*level)
@@ -467,7 +467,7 @@ class Medic(Charachter):
         print'           `\'-----\'`      \        __.\' '
         print'                           `-..--\'` '
 
-class Shadow(Charachter):  
+class Shadow(Character):  
     def __init__(self, level):
         self.name = "shadow"
         self.health = 1 + (1*.1*level)
@@ -521,7 +521,7 @@ class Shadow(Charachter):
         print"..................,,,,,,,,::::~~~::,...........................,,:::::::,,,,,,,,,..................."
         print"................,,,,,,,,,,::::~~~::,............................,,::::,,,,,,,,,,,,,,................"
 
-class Goblin(Charachter):
+class Goblin(Character):
     def __init__(self, level):
         self.name = 'Goblin'
         self.health = 6 + (12*.1*level)
@@ -555,7 +555,7 @@ class Goblin(Charachter):
         print"     /.--\'        `-. `. \         `-.__.\'"
         print"                     `.\'_/ "
 
-class Zombie(Charachter):
+class Zombie(Character):
     def __init__(self, level):
         self.name = 'zombie'
         self.health = 10 + (10*.1*level)
@@ -571,7 +571,7 @@ class Zombie(Charachter):
     def pic(self):
         " "
 
-class Slime(Charachter):
+class Slime(Character):
     def __init__(self, level):
         self.name = 'Slime'
         self.health = 10 + (15*.1*level)
@@ -621,7 +621,7 @@ class Slime(Charachter):
         print"    7            ..~~::..~=~:....:~::..,~~~~~~~~::,,......,:~~,,.........................7          "
         print"               7,~:,.,,.~~~,,..:~~::,.:=~=~~:~~~~,........,,:~,,.........................~7         "
 
-class FireEmp(Charachter):
+class FireEmp(Character):
     def __init__(self, level):
         self.name = "Fire Imp"
         self.health = 6 + (10*.1*level)
@@ -675,7 +675,7 @@ class FireEmp(Charachter):
         print"                         /   |"
         print"                        (-(-(\' "
     
-class RockGolem(Charachter):
+class RockGolem(Character):
     def __init__(self, level):
         self.name = "Rock Golem"
         self.health = 15 + (20*.1*level)
@@ -712,7 +712,7 @@ class RockGolem(Charachter):
         print"                          _/,/\'"
         print"                        /,/,\""  
 
-class DarkWizard(Charachter):
+class DarkWizard(Character):
     def __init__(self):
         self.name = "Dark Wizard"
         self.health = 250
