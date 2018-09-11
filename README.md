@@ -6,6 +6,7 @@ This is a text based game created solely in Python. The game allows the user to 
 
 <h2>Technologies Used</h2>
 <li>Python</li>
+<h2>Images</h2>
 
 <img src="./P7.png">
 
